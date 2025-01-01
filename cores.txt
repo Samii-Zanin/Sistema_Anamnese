@@ -1,0 +1,6 @@
+branco = rgb(204, 77, 166)
+branco =#ad0e86
+branco = rgb(255, 255, 255)
+branco = rgb(255, 255, 255)
+branco =#ff85da
+branco = rgb(255, 255, 255)
