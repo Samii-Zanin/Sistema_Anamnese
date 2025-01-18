@@ -15,6 +15,8 @@ class MenuCadastro(ctk.CTkFrame):
         self.frame_labels_e_entrys = ctk.CTkFrame(self, width=1100, height=554, fg_color="#c7c7c7")
         self.frame_labels_e_entrys.place(x=0, y=97)
 
+        self.frames = {}
+
         imagem_titulo = ctk.CTkImage(Image.open("imagens\\titulo.png"), size=(270, 39))
         anamnese_txt = ctk.CTkLabel(
             self, 
@@ -64,6 +66,7 @@ class MenuCadastro(ctk.CTkFrame):
         width=133,
         height=43,
         corner_radius=20,
+        command=self.ir_para_historicos
         )
         botao_historico.place(relx=0.244, rely=0.07)
 
@@ -78,6 +81,7 @@ class MenuCadastro(ctk.CTkFrame):
         width=140,
         height=43,
         corner_radius=20,
+        command=self.ir_para_cuidados_queixas
         )
         botao_cuidado_queixa.place(relx=0.364, rely=0.07)
         
@@ -91,6 +95,7 @@ class MenuCadastro(ctk.CTkFrame):
         width=133,
         height=43,
         corner_radius=20,
+        command=self.ir_para_avaliacao
         )
         botao_avaliacao.place(relx=0.49, rely=0.07)
 
@@ -139,17 +144,35 @@ class MenuCadastro(ctk.CTkFrame):
         )
         botao_pesquisar.place(relx=0.780, rely=0.07)
     def ir_para_dados_pessoais(self):
+        # Garantir que a tela de Dados Pessoais seja mostrada
         from etapas_cadastro import DadosPessoais
-        for widget in self.frame_labels_e_entrys.winfo_children():
-            widget.destroy()
-        dados_pessoais = DadosPessoais(self.frame_labels_e_entrys, self.controller)
-        dados_pessoais.place(x=0,y=0)
+        self.atualizar_frame(DadosPessoais)
     def ir_para_habitos(self):
+        # Garantir que a tela de Habitos seja mostrada
         from etapas_cadastro import Habitos
-        for widget in self.frame_labels_e_entrys.winfo_children():
-            widget.destroy()
-        habitos = Habitos(self.frame_labels_e_entrys, self.controller)
-        habitos.place(x=0,y=0)
+        self.atualizar_frame(Habitos)
+    def ir_para_historicos(self):
+        from etapas_cadastro import Historico
+        self.atualizar_frame(Historico)   
+    def ir_para_cuidados_queixas(self):
+        from etapas_cadastro import CuidadosQueixas
+        self.atualizar_frame(CuidadosQueixas)
+    def ir_para_avaliacao(self):
+        from etapas_cadastro import Avaliacao
+        self.atualizar_frame(Avaliacao)
+    
+
+    def atualizar_frame(self, frame_class):
+        # Esconder os frames antigos
+        for frame in self.frames.values():
+            frame.place_forget()  # Oculta o frame atual (mas não destrói)
+
+        # Se o frame ainda não foi criado, crie-o
+        if frame_class not in self.frames:
+            frame = frame_class(self.frame_labels_e_entrys, self.controller)
+            self.frames[frame_class] = frame
+        # Mostrar o frame desejado
+        self.frames[frame_class].place(x=0,y=0)
 # Testando diretamente a classe MenuCadastro
 if __name__ == "__main__":
     # Criar a janela principal temporária
