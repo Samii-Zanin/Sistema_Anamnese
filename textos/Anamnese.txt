@@ -1,0 +1,4 @@
+Fazer o projeto que a Nicoli espera ter no computador dela para gerenciar os clientes que ela tem na faculdade, assim facilitando o atendimento.
+Basicamente o software deverá conter o cadastro de todos os dados do cliente, e também edição dos dados.
+Precisa conter método de pesquisa para encontrar determinado cliente.
+Precisa conter mecanismo que gere um pdf dos dados do cliente
