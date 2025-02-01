@@ -163,19 +163,13 @@ class MenuCadastro(ctk.CTkFrame):
     
 
     def atualizar_frame(self, frame_class):
-        # Esconder os frames antigos
         for frame in self.frames.values():
-            frame.place_forget()  # Oculta o frame atual (mas não destrói)
-
-        # Se o frame ainda não foi criado, crie-o
+            frame.place_forget()
         if frame_class not in self.frames:
             frame = frame_class(self.frame_labels_e_entrys, self.controller)
             self.frames[frame_class] = frame
-        # Mostrar o frame desejado
         self.frames[frame_class].place(x=0,y=0)
-# Testando diretamente a classe MenuCadastro
 if __name__ == "__main__":
-    # Criar a janela principal temporária
     app = ctk.CTk()  # Inicializa o CustomTkinter
     app.title("Teste MenuCadastro")
     app.geometry("1100x650")

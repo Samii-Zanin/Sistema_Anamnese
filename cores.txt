@@ -1,4 +1,4 @@
-branco = rgb(204, 77, 166)
+branco = rgb(80, 1, 56)
 branco =#ad0e86
 branco = rgb(199, 199, 199)
 branco = #c7c7c7
