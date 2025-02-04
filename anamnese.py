@@ -21,7 +21,7 @@ class App(ctk.CTk):
     def show_frame(self, frame_class):
         # Verificar se a tela já foi criada
         if frame_class not in self.frames:
-            frame = frame_class(self.container, self)
+            frame = frame_class(self.container, self)  # Passa 'self' como controller
             self.frames[frame_class] = frame
             frame.grid(row=0, column=0, sticky="nsew")
         # Trazer a tela à frente

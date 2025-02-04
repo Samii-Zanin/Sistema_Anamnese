@@ -12,7 +12,7 @@ class MenuCadastro(ctk.CTkFrame):
         self.configure(width=1100, height=650, fg_color="#ff85da")
         
         
-        self.frame_labels_e_entrys = ctk.CTkFrame(self, width=1100, height=554, fg_color="#c7c7c7")
+        self.frame_labels_e_entrys = ctk.CTkFrame(self, width=1100, height=554, fg_color="#ff85da")
         self.frame_labels_e_entrys.place(x=0, y=97)
 
         self.frames = {}
@@ -166,11 +166,11 @@ class MenuCadastro(ctk.CTkFrame):
         for frame in self.frames.values():
             frame.place_forget()
         if frame_class not in self.frames:
-            frame = frame_class(self.frame_labels_e_entrys, self.controller)
+            frame = frame_class(self.frame_labels_e_entrys, self)  # Passa 'self' como controller
             self.frames[frame_class] = frame
-        self.frames[frame_class].place(x=0,y=0)
+        self.frames[frame_class].place(x=0, y=0)
 if __name__ == "__main__":
-    app = ctk.CTk()  # Inicializa o CustomTkinter
+    app = ctk.CTk() 
     app.title("Teste MenuCadastro")
     app.geometry("1100x650")
 
