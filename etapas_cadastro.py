@@ -831,6 +831,19 @@ class Historico(ctk.CTkFrame):
 
 
 class CuidadosQueixas(ctk.CTkFrame):
+    def sim_nao(self, nome_botao, nome_entry, x, y, opcao1, opcao2, opcao3=None):
+        if nome_botao.cget("text") == opcao1:
+            nome_botao.configure(text=opcao2, fg_color="red", anchor="e")
+            if nome_entry and x and y != None:
+                nome_entry.place_forget()
+        elif nome_botao.cget("text") == opcao2:
+            nome_botao.configure(text=opcao1, fg_color="green", anchor="w")
+            if nome_entry and x and y != None:
+                nome_entry.place(x=x, y=y)
+        elif nome_botao.cget("text") == "Nulo":
+            nome_botao.configure(text=opcao1, fg_color="green", anchor="w")
+            if nome_entry and x and y != None:
+                nome_entry.place(x=x, y=y)
     def __init__(self, parent, controller=None):
         super().__init__(parent)
 
@@ -841,20 +854,116 @@ class CuidadosQueixas(ctk.CTkFrame):
         self.configure(fg_color="#ff85da", width=1100, height=554)
 
         # Exemplo de widgets dentro de Dados Pessoais
-        lbl_titulo = ctk.CTkLabel(self, text="asssssssssssssss", font=("Arial", 20))
-        lbl_titulo.pack(pady=10)
+        lbl_cuidados = ctk.CTkLabel(self, text="Cuidados", text_color="#500138", font=("Arial", 25))
+        lbl_cuidados.place(x=10,y=10)
 
-        lbl_nome = ctk.CTkLabel(self, text="Nome:")
-        lbl_nome.pack(pady=5)
+        lbl_filtro_solar = ctk.CTkLabel(self, text="Utiliza filtro solar?", text_color="#500138", font=("Arial", 15))
+        lbl_filtro_solar.place(x=12, y=45)
+        btn_filtro_solar = ctk.CTkButton(
+            self,
+            text="Nulo",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="gray",
+            text_color="black",
+            hover_color="white",
+            corner_radius=8,
+            width=80,
+            height=20,
+            anchor="center",
+            command=lambda: self.sim_nao(btn_filtro_solar, entry_filtro_solar, 10, 75, "Sim", "Não"),
+        )
+        btn_filtro_solar.place(x=225, y=47)
+        entry_filtro_solar = ctk.CTkEntry(self, width=300, placeholder_text="Qual? E com que frequência?") 
+        
+        lbl_cosmetico_corporal = ctk.CTkLabel(self, text="Utiliza algum cosmético corporal?", text_color="#500138", font=("Arial", 15))
+        lbl_cosmetico_corporal.place(x=12, y=105)
+        btn_cosmetico_corporal = ctk.CTkButton(
+            self,
+            text="Nulo",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="gray",
+            text_color="black",
+            hover_color="white",
+            corner_radius=8,
+            width=80,
+            height=20,
+            anchor="center",
+            command=lambda: self.sim_nao(btn_cosmetico_corporal, entry_cosmetico_corporal, 10, 135, "Sim", "Não"),
+        )
+        btn_cosmetico_corporal.place(x=225, y=105) #195 165
+        entry_cosmetico_corporal = ctk.CTkEntry(self, width=300, placeholder_text="Qual(is)?") 
+       
+        lbl_tratamento_corporal = ctk.CTkLabel(self, text="Já fez algum tratamento corporal?", text_color="#500138", font=("Arial", 15))
+        lbl_tratamento_corporal.place(x=12, y=165)
+        btn_tratamento_corporal = ctk.CTkButton(
+            self,
+            text="Nulo",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="gray",
+            text_color="black",
+            hover_color="white",
+            corner_radius=8,
+            width=80,
+            height=20,
+            anchor="center",
+            command=lambda: self.sim_nao(btn_tratamento_corporal, entry_tratamento_corporal, 10, 195, "Sim", "Não"),
+        )
+        btn_tratamento_corporal.place(x=225, y=165) #195 165
+        entry_tratamento_corporal = ctk.CTkEntry(self, width=300, placeholder_text="Qual(is)?") 
 
-        entry_nome = ctk.CTkEntry(self, width=300)
-        entry_nome.pack(pady=5)
+        #QUEIXAS
+        lbl_queixas = ctk.CTkLabel(self, text="Queixas", text_color="#500138", font=("Arial", 25))
+        lbl_queixas.place(x=402,y=10)
 
-        lbl_idade = ctk.CTkLabel(self, text="Idade:")
-        lbl_idade.pack(pady=5)
+        lbl_principal_queixa = ctk.CTkLabel(self, text="Qual a sua principal queixa?", text_color="#500138", font=("Arial", 15))
+        lbl_principal_queixa.place(x=402, y=45)
+        entry_principal_queixa = ctk.CTkEntry(self, width=300, placeholder_text="") 
+        entry_principal_queixa.place(x=400,y=75)
+        
+        lbl_tempo_acontecimento = ctk.CTkLabel(self, text="A quanto tempo isso acontece?", text_color="#500138", font=("Arial", 15))
+        lbl_tempo_acontecimento.place(x=402, y=105)
+        entry_tempo_acontecimento = ctk.CTkEntry(self, width=300, placeholder_text="") 
+        entry_tempo_acontecimento.place(x=400, y=135)
+       
+        lbl_agrave_queixa = ctk.CTkLabel(self, text="Existe algo que agrave sua queixa?", text_color="#500138", font=("Arial", 15))
+        lbl_agrave_queixa.place(x=402, y=165)
+        entry_agrave_queixa = ctk.CTkEntry(self, width=300, placeholder_text="Se sim, o que?") 
+        entry_agrave_queixa.place(x=400, y=195)
 
-        entry_idade = ctk.CTkEntry(self, width=300)
-        entry_idade.pack(pady=5)
+        lbl_historico_familiar_queixa = ctk.CTkLabel(self, text="Existe algum histórico familiar de sua queixa?", text_color="#500138", font=("Arial", 15))
+        lbl_historico_familiar_queixa.place(x=402, y=225)
+        btn_historico_familiar_queixa = ctk.CTkButton(
+            self,
+            text="Nulo",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="gray",
+            text_color="black",
+            hover_color="white",
+            corner_radius=8,
+            width=80,
+            height=20,
+            anchor="center",
+            command=lambda: self.sim_nao(btn_historico_familiar_queixa, None, None, None, "Sim", "Não"),
+        )
+        btn_historico_familiar_queixa.place(x=700, y=227) #195 165
+
+        lbl_tratou_anteriormente = ctk.CTkLabel(self, text="Você já tratou sua queixa anteriormente?", text_color="#500138", font=("Arial", 15))
+        lbl_tratou_anteriormente.place(x=402, y=265)
+        btn_tratou_anteriormente = ctk.CTkButton(
+            self,
+            text="Nulo",
+            font=ctk.CTkFont(size=14, weight="bold"),
+            fg_color="gray",
+            text_color="black",
+            hover_color="white",
+            corner_radius=8,
+            width=80,
+            height=20,
+            anchor="center",
+            command=lambda: self.sim_nao(btn_tratou_anteriormente, entry_tratou_anteriormente, 400, 295, "Sim", "Não"),
+        )
+        btn_tratou_anteriormente.place(x=700, y=267) #195 165
+        entry_tratou_anteriormente = ctk.CTkEntry(self, width=350, placeholder_text="Por quanto tempo? Qual foi o tratamento? Funcionou?")
 
         # Botão "Próximo"
         btn_proximo = ctk.CTkButton(
@@ -876,6 +985,19 @@ class CuidadosQueixas(ctk.CTkFrame):
 
 
 class Avaliacao(ctk.CTkFrame):
+    def sim_nao(self, nome_botao, nome_entry, x, y, opcao1, opcao2, opcao3=None):
+        if nome_botao.cget("text") == opcao1:
+            nome_botao.configure(text=opcao2, fg_color="red", anchor="e")
+            if nome_entry and x and y != None:
+                nome_entry.place_forget()
+        elif nome_botao.cget("text") == opcao2:
+            nome_botao.configure(text=opcao1, fg_color="green", anchor="w")
+            if nome_entry and x and y != None:
+                nome_entry.place(x=x, y=y)
+        elif nome_botao.cget("text") == "Nulo":
+            nome_botao.configure(text=opcao1, fg_color="green", anchor="w")
+            if nome_entry and x and y != None:
+                nome_entry.place(x=x, y=y)
     def __init__(self, parent, controller=None):
         super().__init__(parent)
 
@@ -885,21 +1007,33 @@ class Avaliacao(ctk.CTkFrame):
         # Configuração do frame para Dados Pessoais
         self.configure(fg_color="#ff85da", width=1100, height=554)
 
-        # Exemplo de widgets dentro de Dados Pessoais
-        lbl_titulo = ctk.CTkLabel(self, text="wwwwwwwwwwwwwwwwwww", font=("Arial", 20))
-        lbl_titulo.pack(pady=10)
+        lbl_fototipo_pele = ctk.CTkLabel(self, text="Fototipo de Pele", text_color="#500138", font=("Arial", 15))
+        lbl_fototipo_pele.place(x=12, y=10)
+        self.fototipo_pele = ctk.StringVar(value="")  # Variável para armazenar a escolha
+        tb_tipo1 = ctk.CTkRadioButton(
+            self, text="I", variable=self.fototipo_pele, value="I", fg_color="#500138", hover_color="#500138")
+        tb_tipo1.place(x=12, y=40)
 
-        lbl_nome = ctk.CTkLabel(self, text="Nome:")
-        lbl_nome.pack(pady=5)
+        rb_tipo2 = ctk.CTkRadioButton(
+            self, text="II", variable=self.fototipo_pele, value="II", fg_color="#500138", hover_color="#500138"  )
+        rb_tipo2.place(x=72, y=40)
 
-        entry_nome = ctk.CTkEntry(self, width=300)
-        entry_nome.pack(pady=5)
+        rb_tipo3 = ctk.CTkRadioButton(
+            self, text="III", variable=self.fototipo_pele, value="III", fg_color="#500138", hover_color="#500138")
+        rb_tipo3.place(x=132, y=40)
+        
+        rb_tipo4 = ctk.CTkRadioButton(
+            self, text="IV", variable=self.fototipo_pele, value="IV", fg_color="#500138", hover_color="#500138")
+        rb_tipo4.place(x=192, y=40)
+        
+        rb_tipo5 = ctk.CTkRadioButton(
+            self, text="V", variable=self.fototipo_pele, value="V", fg_color="#500138", hover_color="#500138")
+        rb_tipo5.place(x=252, y=40)
+        
+        rb_tipo6 = ctk.CTkRadioButton(
+            self, text="VI", variable=self.fototipo_pele, value="VI", fg_color="#500138", hover_color="#500138")
+        rb_tipo6.place(x=312, y=40)
 
-        lbl_idade = ctk.CTkLabel(self, text="Idade:")
-        lbl_idade.pack(pady=5)
-
-        entry_idade = ctk.CTkEntry(self, width=300)
-        entry_idade.pack(pady=5)
 
         # Botão "Finalizar"
         btn_finalizar = ctk.CTkButton(
